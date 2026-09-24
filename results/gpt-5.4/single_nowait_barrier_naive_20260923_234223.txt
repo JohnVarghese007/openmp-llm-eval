@@ -1,0 +1,11 @@
+MODEL=gpt-5.4
+PROMPT=naive.txt
+CODE=single_nowait_barrier.c
+TIMESTAMP=20260923_234223
+
+========================================
+
+Verdict: SAFE
+
+Reasoning:
+`shared_var` is shared across the parallel region, and it is written by exactly one thread inside the `single` region. Although `single nowait` removes the implicit barrier at the end of the `single`, the explicit `#pragma omp barrier` immediately afterward synchronizes all threads. This barrier ensures the write to `shared_var = 99` is completed and visible to all threads before thread 1 reads it in the `printf`. Therefore, there is no data race or ordering bug.

@@ -1,0 +1,15 @@
+#include <omp.h>
+#include <stdio.h>
+
+int main() {
+    int counter = 0;
+
+    #pragma omp parallel for
+    for (int i = 0; i < 1000; i++) {
+        counter++;
+    }
+
+    printf("Counter = %d\n", counter);
+
+    return 0;
+}

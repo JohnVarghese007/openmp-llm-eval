@@ -1,0 +1,44 @@
+MODEL=ollama/qwen2.5-coder:7b
+PROMPT=naive.txt
+CODE=race_sum.c
+TIMESTAMP=20260923_224008
+
+========================================
+
+### User:
+You are an expert in OpenMP concurrency analysis. Analyze the following OpenMP program for concurrency issues.
+
+Code:
+
+```c
+#include <omp.h>
+#include <stdio.h>
+
+int main() {
+    int sum = 0;
+    int arr[100];
+
+    for (int i = 0; i < 100; i++) {
+        arr[i] = i + 1;
+    }
+
+    #pragma omp parallel for reduction(+:sum)
+    for (int i = 0; i < 100; i++) {
+        sum += arr[i];   
+    }
+
+    printf("Sum = %d\n", sum);
+    return 0;
+}
+```
+
+Provide your evaluation strictly using the following format:
+
+Verdict: SAFE or BUGGY
+Race-Free: Yes or No
+Deterministic: Yes or No
+
+Reasoning:
+<Provide a concise step-by-step analysis explaining your findings>
+
+<|im_start|>
