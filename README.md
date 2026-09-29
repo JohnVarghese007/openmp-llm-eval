@@ -88,7 +88,6 @@ models/openai/gpt_5.4sh
 ---
 
 
-```markdown
 # OpenMP LLM Evaluation Findings & Analysis
 
 ## Key Takeaways
