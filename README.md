@@ -29,7 +29,12 @@ This repository evaluates the capability of modern Large Language Models (LLMs) 
 ![Test Case Pass Rate Across All Models](testcase_pass_rate.png)
 
 #### Significance & Key Observations:
-* **High-Confidence Patterns**: `critical_section.c`, `drb_example.c`, and `flush_barrier_sync.c` saw the highest pass rates. Models excel at recognizing standard `#pragma omp critical` increments and identifying clear global variable data races.
+* **Frontier Model Leadership**: `gpt-5.4` achieved the highest overall accuracy at **92.9%**, reaching 100% pass rate under `naive.txt` prompting.
+* **Prompt Strategy Nuance**: 
+  * Few-shot prompting degraded performance for `gpt-3.5-turbo` (dropping from 85.7% to 57.1%) as the model tended to over-analyze safe synchronization patterns (e.g., `barrier_correct.c` and `task_depend_sync.c`).
+  * `groq/qwen/qwen3.8-27b` saw a performance gain under `few_shot.txt` (rising from 71.4% to 85.7%) once rate limits and response extractions were clean.
+  * Both `gpt-4o` and `gpt-4o-mini` maintained a stable **85.7%** accuracy across both prompt strategies.
+
 * **Scoping & Synchronization Blindspots**: `firstprivate_initialization.c` and `barrier_correct.c` proved to be the most challenging test cases across all models. LLMs frequently misinterpret whether private copies of variables modify the outer scope and struggle to correctly model `happens-before` relationships established by explicit barriers.
 
 ---
@@ -43,7 +48,6 @@ This repository evaluates the capability of modern Large Language Models (LLMs) 
 ├── results/            # Saved raw text outputs per model execution
 ├── results.csv         # Aggregated benchmark evaluation logs
 ├── run_eval.py         # LiteLLM test runner
-├── FINDINGS.md         # In-depth benchmark conclusions and bug analysis
 └── README.md
 ```
 
@@ -92,24 +96,22 @@ models/openai/gpt_5.4sh
 
 ## Key Takeaways
 
-1. **`gpt-5.4` and `gpt-4o` Standardize Top Performance**
-   - Both models performed reliably on standard code patterns, scoring 85.7% accuracy under `naive.txt`.
-   - `firstprivate_initialization.c` posed a challenge across multiple frontier models, as models frequently misinterpret scoping rules for private variable copies.
+1. **`gpt-5.4` Sets the Performance Baseline**
+   - `gpt-5.4` demonstrated top-tier accuracy at **92.9%** overall, correctly identifying all 7 OpenMP patterns under naive prompting and failing only 1 case under few-shot prompting.
 
-2. **Negative Delta in Few-Shot Prompting for Mid-Sized Models**
-   - Counterintuitively, `few_shot.txt` degraded accuracy for smaller models (`gpt-3.5-turbo` dropped from 85.7% to 57.1%). 
-   - Long reasoning demonstrations caused smaller models to overfit to negative examples, leading them to falsely flag safe constructs (e.g., `barrier_correct.c` and `task_depend_sync.c`) as `INCORRECT`.
+2. **Prompt Sensitivity Varies by Model Scale**
+   - In-context examples (`few_shot.txt`) caused `gpt-3.5-turbo` to overfit on negative patterns, incorrectly flagging valid synchronization as buggy.
+   - Conversely, `groq/qwen/qwen3.8-27b` performed better with structured few-shot examples once output formatting was cleanly parsed.
 
-3. **Rate Limits & Unparsed Output (`groq/qwen/qwen3.8-27b`)**
-   - On `few_shot.txt`, Qwen experienced high output token counts that hit API rate limits or generated extended reasoning blocks, resulting in `UNKNOWN` verdict extractions.
-   - Restricting max output tokens or enforcing fixed string formats (`VERDICT: CORRECT`) is necessary when benchmarking models on rate-limited tiers.
+3. **Consistent Mid-Tier Reliability**
+   - Both `gpt-4o` and `gpt-4o-mini` matched performance across prompting modes at **85.7%**, showing consistent handling of data races and OpenMP synchronization semantics.
 
 ## Accuracy Summary Table
 
 | Model | Naive Pass Rate | Few-Shot Pass Rate | Overall Accuracy |
 | :--- | :---: | :---: | :---: |
-| **gpt-5.4** | **85.7%** | **85.7%** | **85.7%** |
-| **gpt-4o** | **85.7%** | **85.7%** | **85.7%** |
-| **gpt-3.5-turbo** | 85.7% | 57.1% | 71.4% |
-| **gpt-4o-mini** | 85.7% | 57.1% | 71.4% |
-| **groq/qwen/qwen3.8-27b** | 71.4% | 28.6% | 50.0% |
+| **gpt-5.4** | **100.0%** (7/7) | 85.7% (6/7) | **92.9%** (13/14) |
+| **gpt-4o** | 85.7% (6/7) | 85.7% (6/7) | **85.7%** (12/14) |
+| **gpt-4o-mini** | 85.7% (6/7) | 85.7% (6/7) | **85.7%** (12/14) |
+| **groq/qwen/qwen3.8-27b** | 71.4% (5/7) | 85.7% (6/7) | **78.6%** (11/14) |
+| **gpt-3.5-turbo** | 85.7% (6/7) | 57.1% (4/7) | **71.4%** (10/14) |

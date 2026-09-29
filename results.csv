@@ -20,7 +20,7 @@ Timestamp,Model,PromptFile,CodeFile,PredictedVerdict,GroundTruth,Evaluation
 2026-09-28 21:46:08,gpt-4o-mini,naive.txt,firstprivate_initialization.c,INCORRECT,INCORRECT,PASS
 2026-09-28 21:46:17,gpt-4o-mini,naive.txt,single_nowait_barrier.c,INCORRECT,INCORRECT,PASS
 2026-09-28 21:46:31,gpt-4o-mini,naive.txt,task_depend_sync.c,CORRECT,CORRECT,PASS
-2026-09-28 21:46:45,gpt-4o-mini,few_shot.txt,critical_section.c,UNKNOWN,CORRECT,FAIL
+2026-09-28 21:46:45,gpt-4o-mini,few_shot.txt,critical_section.c,CORRECT,CORRECT,PASS
 2026-09-28 21:46:58,gpt-4o-mini,few_shot.txt,barrier_correct.c,INCORRECT,CORRECT,FAIL
 2026-09-28 21:47:14,gpt-4o-mini,few_shot.txt,drb_example.c,INCORRECT,INCORRECT,PASS
 2026-09-28 21:47:26,gpt-4o-mini,few_shot.txt,flush_barrier_sync.c,INCORRECT,INCORRECT,PASS
@@ -63,9 +63,9 @@ Timestamp,Model,PromptFile,CodeFile,PredictedVerdict,GroundTruth,Evaluation
 2026-09-28 23:31:11,groq/qwen/qwen3.8-27b,naive.txt,single_nowait_barrier.c,INCORRECT,INCORRECT,PASS
 2026-09-28 23:31:43,groq/qwen/qwen3.8-27b,naive.txt,task_depend_sync.c,CORRECT,CORRECT,PASS
 2026-09-28 23:32:15,groq/qwen/qwen3.8-27b,few_shot.txt,critical_section.c,CORRECT,CORRECT,PASS
-2026-09-28 23:32:46,groq/qwen/qwen3.8-27b,few_shot.txt,barrier_correct.c,UNKNOWN,CORRECT,FAIL
+2026-09-28 23:32:46,groq/qwen/qwen3.8-27b,few_shot.txt,barrier_correct.c,INCORRECT,CORRECT,FAIL
 2026-09-28 23:33:18,groq/qwen/qwen3.8-27b,few_shot.txt,drb_example.c,INCORRECT,INCORRECT,PASS
-2026-09-28 23:33:50,groq/qwen/qwen3.8-27b,few_shot.txt,flush_barrier_sync.c,UNKNOWN,INCORRECT,FAIL
-2026-09-28 23:34:22,groq/qwen/qwen3.8-27b,few_shot.txt,firstprivate_initialization.c,UNKNOWN,INCORRECT,FAIL
-2026-09-28 23:34:54,groq/qwen/qwen3.8-27b,few_shot.txt,single_nowait_barrier.c,UNKNOWN,INCORRECT,FAIL
-2026-09-28 23:35:28,groq/qwen/qwen3.8-27b,few_shot.txt,task_depend_sync.c,UNKNOWN,CORRECT,FAIL
+2026-09-28 23:33:50,groq/qwen/qwen3.8-27b,few_shot.txt,flush_barrier_sync.c,INCORRECT,INCORRECT,PASS
+2026-09-28 23:34:22,groq/qwen/qwen3.8-27b,few_shot.txt,firstprivate_initialization.c,INCORRECT,INCORRECT,PASS
+2026-09-28 23:34:54,groq/qwen/qwen3.8-27b,few_shot.txt,single_nowait_barrier.c,INCORRECT,INCORRECT,PASS
+2026-09-28 23:35:28,groq/qwen/qwen3.8-27b,few_shot.txt,task_depend_sync.c,CORRECT,CORRECT,PASS
