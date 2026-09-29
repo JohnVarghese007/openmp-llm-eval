@@ -1,12 +1,19 @@
-You are an expert in OpenMP concurrency analysis. Analyze the following OpenMP program for concurrency issues.
+You are an expert at analyzing C and OpenMP programs.
 
-Code:
+You will be provided with:
+1. A Functional Specification describing the intended input/output behavior of a program.
+2. A C code implementation utilizing OpenMP.
 
+Your task is to analyze the C code against the Functional Specification and evaluate whether the implementation deterministically achieves the specified behavior without concurrency bugs (such as data races, race conditions, missing memory synchronization, deadlocks etc.).
+
+### Functional Specification
+{SPECIFICATION}
+
+### Implementation Code
+```c
 {CODE}
-
+```
 Provide your evaluation strictly using the following format:
 
-Verdict: SAFE or BUGGY
-
-Reasoning:
-<Provide a concise reasoning for above verdict.>
+Verdict: <Must be EXACTLY 'CORRECT' or 'INCORRECT'>
+Reasoning: <Provide a step-by-step concurrency analysis evaluating thread safety, memory visibility, and data scoping against the specification.>

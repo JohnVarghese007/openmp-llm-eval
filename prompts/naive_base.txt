@@ -7,8 +7,6 @@ Code:
 Provide your evaluation strictly using the following format:
 
 Verdict: SAFE or BUGGY
-Race-Free: Yes or No
-Deterministic: Yes or No
 
 Reasoning:
-<Provide a concise step-by-step analysis explaining your findings>
+<Provide a concise reasoning for above verdict.>

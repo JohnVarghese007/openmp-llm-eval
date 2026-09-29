@@ -11,9 +11,6 @@ int main() {
             shared_var = 99;
         }
 
-        
-        #pragma omp barrier
-
         if (omp_get_thread_num() == 1) {
             printf("Shared var: %d\n", shared_var);
         }
