@@ -5,7 +5,7 @@ int main() {
     int val = 10;
     int result[4] = {0};
 
-    #pragma omp parallel for firstprivate(val) num_threads(4)
+    #pragma omp parallel for private(val) num_threads(4)
     for (int i = 0; i < 4; i++) {
         val += i; 
         result[i] = val;

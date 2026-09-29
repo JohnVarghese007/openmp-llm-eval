@@ -10,13 +10,11 @@ int main() {
         int id = omp_get_thread_num();
         if (id == 0) {
             data = 42;
-            #pragma omp flush(data, flag)
-            flag = 1;
-        }
-
-        #pragma omp barrier
-
-        if (id == 1) {
+            flag = 1; 
+        } else if (id == 1) {
+            while (flag == 0) {
+                
+            }
             printf("Flag: %d, Data: %d\n", flag, data);
         }
     }

@@ -1,46 +1,95 @@
-You are an expert in OpenMP concurrency analysis. Analyze the following OpenMP program for concurrency issues.
+You are an expert at analyzing C and OpenMP programs.
 
-Example 1
+You will be provided with:
+1. A Functional Specification describing the intended input/output behavior of a program.
+2. A C code implementation utilizing OpenMP.
 
-Code:
+Your task is to analyze the C code against the Functional Specification and evaluate whether the implementation deterministically achieves the specified behavior without concurrency bugs (such as data races, race conditions, missing memory synchronization, deadlocks etc).
 
-#pragma omp parallel for
-for(int i=0; i<100; i++)
-{
-    x = x + 1;
+---
+
+### Example 1
+
+### Functional Specification
+Given an execution loop running 100 iterations, the task is to increment a counter variable x once per iteration and output the final counter value.
+
+### Implementation Code
+```c
+#include <omp.h>
+#include <stdio.h>
+
+void run_counter() {
+    int x = 0;
+    #pragma omp parallel for
+    for(int i = 0; i < 100; i++) {
+        x = x + 1;
+    }
+    printf("%d\n", x);
 }
+```
 
-Verdict: BUGGY
+Verdict: INCORRECT
 
-Reasoning:
-The variable `x` is shared across threads. Multiple threads read and write `x` concurrently without synchronization, creating a data race and non-deterministic behavior.
+Reasoning: The variable `x` is shared across threads. Multiple threads read and write `x` concurrently without atomic protection or a reduction clause, creating a severe data race. The code fails to deterministically satisfy the functional specification.
 
-======================================
+---
 
-Example 2
+### Example 2
 
-Code:
+### Functional Specification
+Given an integer array of size n, the task is to calculate the total sum of all elements in the array.
 
-#pragma omp parallel for reduction(+:sum)
-for(int i=0; i<n; i++)
-{
-    sum += arr[i];
+### Implementation Code
+```c
+#include <omp.h>
+
+int compute_sum(int *arr, int n) {
+    int sum = 0;
+    #pragma omp parallel for reduction(+:sum)
+    for(int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    return sum;
 }
+```
 
-Verdict: SAFE
+Verdict: CORRECT
 
-Reasoning:
-The `reduction` clause creates thread-private copies of `sum` and combines them safely upon loop completion. There are no data races, and execution is deterministic.
+Reasoning: The `reduction` clause creates thread-private copies of `sum` and combines them safely upon loop completion. The execution is data-race free and deterministically yields the correct result matching the functional specification.
 
-======================================
+---
 
-Code:
+### Example 3
 
+### Functional Specification
+Given an integer array of size n, the task is to calculate the total sum of all elements in the array.
+
+### Implementation Code
+```c
+#include <omp.h>
+
+int compute_sum(int *arr, int n) {
+    int sum = 0;
+    #pragma omp parallel for reduction(+:sum)
+    for(int i = 0; i < n; i++) {
+        sum += arr[i] * arr[i];
+    }
+    return sum;
+}
+```
+
+Verdict: INCORRECT
+
+Reasoning: The OpenMP reduction clause ensures the loop is thread-safe and free of data races. However, the loop computes the sum of the squares of the elements (arr[i] * arr[i]) rather than the simple sum requested by the functional specification. The code is parallel-safe but logically incorrect.
+
+---
+
+### Target Evaluation Task
+
+### Functional Specification
+{SPECIFICATION}
+
+### Implementation Code
+```c
 {CODE}
-
-Provide your evaluation strictly using the following format:
-
-Verdict: SAFE or BUGGY
-
-Reasoning:
-<Provide a concise reasoning for above verdict.>
+```
