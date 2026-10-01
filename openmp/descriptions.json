@@ -5,5 +5,6 @@
   "firstprivate_initialization.c": "Given a baseline parameter V = 10 and an array of size 4, the task is to compute V + i for each index i in [0, 3] while preserving the original value of V, and print V in the format 'Original val: V'.",
   "single_nowait_barrier.c": "Given a variable S, the task is to assign S = 99 and output its value in the format 'Shared var: S'.",
   "task_depend_sync.c": "Given a variable X, the task is to perform an assignment X = 100 followed by a read operation, outputting the value in the format 'Value of x: X'.",
-  "critical_section.c": "Given an execution loop running 1000 iterations, the task is to increment a counter variable once per iteration and output the final counter value."
+  "critical_section.c": "Given an execution loop running 1000 iterations, the task is to increment a counter variable once per iteration and output the final counter value.",
+  "jacobi.c": "Given a 64x64 grid, the task is to perform 10 iterations of a 2D Jacobi stencil computation where non-boundary elements are updated based on their 4-point spatial average."
 }

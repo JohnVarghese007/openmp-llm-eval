@@ -18,6 +18,7 @@ GROUND_TRUTH = {
     "firstprivate_initialization.c": "INCORRECT",
     "single_nowait_barrier.c": "INCORRECT",
     "task_depend_sync.c": "CORRECT",
+    "jacobi.c": "CORRECT",
 }
 
 
@@ -52,7 +53,7 @@ def run_model(model: str, prompt: str) -> str:
     """
 
     #try and dodge rate limits
-    time.sleep(25)
+    #time.sleep(25)
     try:
         response = litellm.completion(
             model=model,

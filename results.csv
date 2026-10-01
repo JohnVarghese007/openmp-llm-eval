@@ -69,3 +69,13 @@ Timestamp,Model,PromptFile,CodeFile,PredictedVerdict,GroundTruth,Evaluation
 2026-09-28 23:34:22,groq/qwen/qwen3.8-27b,few_shot.txt,firstprivate_initialization.c,INCORRECT,INCORRECT,PASS
 2026-09-28 23:34:54,groq/qwen/qwen3.8-27b,few_shot.txt,single_nowait_barrier.c,INCORRECT,INCORRECT,PASS
 2026-09-28 23:35:28,groq/qwen/qwen3.8-27b,few_shot.txt,task_depend_sync.c,CORRECT,CORRECT,PASS
+2026-10-01 06:10:53,gpt-5.4,naive.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:11:05,gpt-5.4,few_shot.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:11:18,gpt-4o,naive.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:11:29,gpt-4o,few_shot.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:11:41,gpt-4o-mini,naive.txt,jacobi.c,INCORRECT,CORRECT,FAIL
+2026-10-01 06:11:55,gpt-4o-mini,few_shot.txt,jacobi.c,INCORRECT,CORRECT,FAIL
+2026-10-01 06:12:04,gpt-3.5-turbo,naive.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:12:12,gpt-3.5-turbo,few_shot.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:12:19,groq/qwen/qwen3.8-27b,naive.txt,jacobi.c,CORRECT,CORRECT,PASS
+2026-10-01 06:18:56,groq/qwen/qwen3.8-27b,few_shot.txt,jacobi.c,CORRECT,CORRECT,PASS
