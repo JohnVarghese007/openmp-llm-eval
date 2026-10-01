@@ -130,3 +130,23 @@ Or through one of the shell scripts, for example:
 ```bash
 models/openai/gpt_5.4.sh
 ```
+
+---
+
+## Per-Run Pass/Fail Matrix
+
+This table records the pass/fail outcome for each model and prompt strategy across every benchmark example in the current CSV run log.
+
+| Model | Prompt | `barrier_incorrect.c` | `critical_section.c` | `drb_example.c` | `firstprivate_initialization.c` | `flush_barrier_sync.c` | `jacobi.c` | `single_nowait_barrier.c` | `task_depend_sync.c` | Overall |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `gpt-3.5-turbo` | `naive.txt` | FAIL | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | 6/8 |
+| `gpt-3.5-turbo` | `few_shot.txt` | PASS | PASS | PASS | FAIL | PASS | FAIL | PASS | FAIL | 5/8 |
+| `gpt-4o` | `naive.txt` | PASS | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | 7/8 |
+| `gpt-4o` | `few_shot.txt` | PASS | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | 7/8 |
+| `gpt-4o-mini` | `naive.txt` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | 8/8 |
+| `gpt-4o-mini` | `few_shot.txt` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | 8/8 |
+| `gpt-5.4` | `naive.txt` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | 8/8 |
+| `gpt-5.4` | `few_shot.txt` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | 8/8 |
+| `groq/qwen/qwen3.8-27b` | `naive.txt` | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | 7/8 |
+| `groq/qwen/qwen3.8-27b` | `few_shot.txt` | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | 7/8 |
+
