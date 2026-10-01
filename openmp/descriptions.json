@@ -1,5 +1,5 @@
 {
-  "barrier_correct.c": "Given a variable V, the task is to set V = 42 during initialization and output its value.",
+  "barrier_incorrect.c": "Given a variable V, the task is to set V = 42 during initialization and output its value.",
   "drb_example.c": "Given an integer N = 1000, the task is to calculate the sum of integers from 1 to N and output the result alongside a sequential verification sum in the format 'sum=X; sum1=Y'.",
   "flush_barrier_sync.c": "Given two variables D and F, the task is to set D = 42 and F = 1, then print their values in the format 'Flag: F, Data: D'.",
   "firstprivate_initialization.c": "Given a baseline parameter V = 10 and an array of size 4, the task is to compute V + i for each index i in [0, 3] while preserving the original value of V, and print V in the format 'Original val: V'.",

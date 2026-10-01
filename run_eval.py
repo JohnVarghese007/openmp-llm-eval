@@ -12,13 +12,13 @@ import re
 # Ground truth dictionary mapping C files to their true correctness
 GROUND_TRUTH = {
     "critical_section.c": "CORRECT",
-    "barrier_correct.c": "CORRECT",
+    "barrier_incorrect.c": "INCORRECT",
     "drb_example.c": "INCORRECT",
     "flush_barrier_sync.c": "INCORRECT",
     "firstprivate_initialization.c": "INCORRECT",
     "single_nowait_barrier.c": "INCORRECT",
     "task_depend_sync.c": "CORRECT",
-    "jacobi.c": "CORRECT",
+    "jacobi.c": "INCORRECT",
 }
 
 
